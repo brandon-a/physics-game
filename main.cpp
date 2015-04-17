@@ -10,5 +10,6 @@ using namespace std;
 int main()
 {
 	cout << "This is the best Physics game ever!\n";
+	cout << "I AGREE!\n";
 	return 0;
 }
