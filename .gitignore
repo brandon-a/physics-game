@@ -1,0 +1,13 @@
+*.obj
+*.exe
+Debug/Physics Game.ilk
+*.log
+*.tlog
+Debug/vc120.idb
+*.sdf
+Physics Game.sln
+*.vcxproj
+*.filters
+Debug/vc120.pdb
+*.pdb
+Physics Game.v12.suo
