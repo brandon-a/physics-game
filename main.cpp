@@ -1,4 +1,5 @@
-//This is the start of our Physics Game
+// This is the start of our Physics Game
+// Brandon and Jamie
 
 #include <iostream>
 
