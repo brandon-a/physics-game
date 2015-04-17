@@ -2,8 +2,12 @@
 // Brandon and Jamie
 
 #include <iostream>
+<<<<<<< HEAD
 #include <iomanip>
 
+=======
+#include <string>
+>>>>>>> origin/master
 using namespace std;
 
 int main()
