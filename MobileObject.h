@@ -27,4 +27,4 @@ public:
 };
 
 
-#endif // STATICOBJECT_H
+#endif // MOBILEOBJECT_H
