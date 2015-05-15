@@ -8,19 +8,16 @@
 class PlayerObject : public MobileObject
 {
 protected:
-	sf::Vector2f velocity;
+	
 
 
 public:
-	PlayerObject();
-	~PlayerObject();
-	void loadObj();
-	void unloadObj();
-	void updateObj();
-	void drawObj();
-
-
-
+	PlayerObject(std::string fileName, sf::Vector2f size, sf::Vector2f pos) : MobileObject(fileName, size, pos) {};
+	~PlayerObject() {};
+	void loadObj() {};
+	void unloadObj() {};
+	void updateObj() {};
+	void drawObj() {};
 
 
 };

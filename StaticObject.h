@@ -12,12 +12,12 @@ protected:
 
 
 public:
-	StaticObject();
-	~StaticObject();
-	void loadObj();
-	void unloadObj();
-	void updateObj();
-	void drawObj();
+	StaticObject(std::string fileName, sf::Vector2f size, sf::Vector2f pos) : Object(fileName, size, pos) {};
+	~StaticObject() {};
+	void loadObj() {};
+	void unloadObj() {};
+	void updateObj() {};
+	void drawObj() {};
 
 
 

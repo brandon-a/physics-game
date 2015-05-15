@@ -3,19 +3,21 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-
+#include "PlayerObject.h"
+#include "StaticObject.h"
 
 int main()
 {
+	PlayerObject p1("resources/blueBoy.png", sf::Vector2f(64, 64), sf::Vector2f(100, 630));
 	//Variables
 	sf::Vector2i screenSize(1000, 800);
-	float pHeight = 64;		// chibi size y direction (height)
+	float pHeight = 64;		// chibi size y direction (height)			//********************************************** READY TO LEAVE
 
 	// to be moved to physics engine
-	sf::Vector2f velocity(0, 0);
-	float acceleration = 0.5;
-	float maxSpeedR = 10;
-	float maxSpeedL = -10;
+	sf::Vector2f velocity(0, 0);				//********************************************** READY TO LEAVE
+	float acceleration = 0.5;			
+	float maxSpeedR = 10;		//********************************************** READY TO LEAVE
+	float maxSpeedL = -10;		//********************************************** READY TO LEAVE  (convert pos and neg)
 
 
 	float frameCounter = 0;
@@ -25,7 +27,7 @@ int main()
 
 	enum direction {Down, Left, Right, Up};
 
-	bool movR = false;
+	bool movR = false;				// Game engine
 	bool movL = false;
 	bool movU = false;
 	bool movD = false;
@@ -34,14 +36,14 @@ int main()
 	
 
 	// Load playerSpriteData
-	sf::Texture playerTexture;
-	sf::Sprite playerSprite;
-	if (!playerTexture.loadFromFile("resources/blueBoy.png"))
-		std::cout << "blueBoy.png failed to open!\n";
-	playerSprite.setTexture(playerTexture);
-	playerSprite.setScale(2.0f, 2.0f);
-	sf::Vector2u pSource(0, 0);
-	playerSprite.setPosition(100, 630);	// set initial position
+	sf::Texture playerTexture;	//********************************************** READY TO LEAVE
+	sf::Sprite playerSprite;		//********************************************** READY TO LEAVE
+	if (!playerTexture.loadFromFile("resources/blueBoy.png"))	//********************************************** READY TO LEAVE
+		std::cout << "blueBoy.png failed to open!\n";	//********************************************** READY TO LEAVE
+	playerSprite.setTexture(playerTexture);	//********************************************** READY TO LEAVE
+	playerSprite.setScale(2.0f, 2.0f);	//********************************************** READY TO LEAVE
+	sf::Vector2u pSource(0, 0);	//********************************************** READY TO LEAVE
+	playerSprite.setPosition(100, 630);	// set initial position		//********************************************** READY TO LEAVE
 
 	// load background
 	sf::Texture backgroundTexture;
@@ -109,8 +111,8 @@ int main()
 
 			if (movU && !movD)
 			{
-				pSource.y = Up;
-				if (velocity.x > 0)
+				pSource.y = Up;			// from object, setters and getters
+				if (velocity.x > 0)		// getters and setters
 					velocity.x -= acceleration;
 			}
 
@@ -131,7 +133,7 @@ int main()
 				}
 
 				else
-					velocity.x = maxSpeedR;
+					velocity.x = maxSpeedR;		// get/set
 			}
 			else
 				if (velocity.x > 0)
@@ -173,8 +175,8 @@ int main()
 			
 
 			//prep for refresh
-			playerSprite.setTextureRect(sf::IntRect(pSource.x * pHeight / 2, pSource.y * pHeight / 2, pHeight / 2, pHeight / 2));
-			playerSprite.move(velocity.x, velocity.y);
+			playerSprite.setTextureRect(sf::IntRect(pSource.x * pHeight / 2, pSource.y * pHeight / 2, pHeight / 2, pHeight / 2));		// player object update function
+			playerSprite.move(velocity.x, velocity.y);			// player object update
 			//std::cout << velocity.x << std::endl;
 		}
 		// frame refresh cycle

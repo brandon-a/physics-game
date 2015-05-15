@@ -9,16 +9,18 @@
 class MobileObject : public Object
 {
 protected:
-	sf::Vector2f velocity;
+	sf::Vector2f velC;		// current velocity
+	sf::Vector2f velM;		// max velocity
+
 	
 
 public:
-	MobileObject();
-	~MobileObject();
-	void loadObj();
-	void unloadObj();
-	void updateObj();
-	void drawObj();
+	MobileObject(std::string fileName, sf::Vector2f size, sf::Vector2f pos) : Object(fileName, size, pos) { velC = { 0, 0 }; velM = { 10, 10 }; };
+	~MobileObject() {};
+	void loadObj() {};
+	void unloadObj() {};
+	void updateObj() {};
+	void drawObj() {};
 
 
 
