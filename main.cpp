@@ -17,8 +17,18 @@ int main()
 	float maxSpeedR = 10;
 	float maxSpeedL = -10;
 
-	bool rMove = false;
-	bool lMove = false;
+
+	float frameCounter = 0;
+	float switchFrame = 100;
+	float frameSpeed = 500;
+
+
+	enum direction {Down, Left, Right, Up};
+
+	bool movR = false;
+	bool movL = false;
+	bool movU = false;
+	bool movD = false;
 	// Game Setup
 	
 	
@@ -30,7 +40,7 @@ int main()
 		std::cout << "blueBoy.png failed to open!\n";
 	playerSprite.setTexture(playerTexture);
 	playerSprite.setScale(2.0f, 2.0f);
-	sf::Vector2u pSource(0, 2);
+	sf::Vector2u pSource(0, 0);
 	playerSprite.setPosition(100, 630);	// set initial position
 
 	// load background
@@ -68,20 +78,28 @@ int main()
 					if (event.key.code == sf::Keyboard::Escape)
 						window.close();
 					if (event.key.code == sf::Keyboard::Right)
-					{
-						rMove = true;
-					}
+						movR = true;
 					if (event.key.code == sf::Keyboard::Left)
-						lMove = true;
+						movL = true;
+					if (event.key.code == sf::Keyboard::Up)
+						movU = true;
+					if (event.key.code == sf::Keyboard::Down)
+						movD = true;
 					break;
 
 
 				case sf::Event::KeyReleased:
 
 					if (event.key.code == sf::Keyboard::Right)
-						rMove = false;
+						movR = false;
 					if (event.key.code == sf::Keyboard::Left)
-						lMove = false;
+						movL = false;
+					if (event.key.code == sf::Keyboard::Up)	
+						movU = false;
+					if (event.key.code == sf::Keyboard::Down)
+						movD = false;
+
+
 
 
 				}
@@ -89,30 +107,70 @@ int main()
 			}
 			//std::cout << playerSprite.getPosition().x << "," << playerSprite.getPosition().y << std::endl;    position to console
 
-			if (rMove)
+			if (movU && !movD)
 			{
+				pSource.y = Up;
+				if (velocity.x > 0)
+					velocity.x -= acceleration;
+			}
 
+			if (movD && !movU)
+			{
+				pSource.y = Down;
+				if (velocity.x > 0)
+					velocity.x -= acceleration;
+			}
+
+			if (movR && !movL)
+			{
+				pSource.y = Right;		// changes the direction the sprite is facing
 				if (velocity.x < maxSpeedR)
 				{
 					velocity.x += acceleration;
 
 				}
 
-				/*else
-					velocity.x = maxSpeedR;*/				// Not needed
+				else
+					velocity.x = maxSpeedR;
 			}
-			if (lMove)
-				if (velocity.x > maxSpeedL)
-					velocity.x -= acceleration;
-				/*else
-					velocity.x = maxSpeedL;*/				// Not needed
-			if (!lMove && !rMove)
-			{
+			else
 				if (velocity.x > 0)
 					velocity.x -= acceleration;
+
+			if (movL && !movR)
+			{
+				pSource.y = Left;
+				if (velocity.x > maxSpeedL)
+					velocity.x -= acceleration;
+				else
+					velocity.x = maxSpeedL;
+			}
+			else
 				if (velocity.x < 0)
 					velocity.x += acceleration;
+
+			if (movL || movR || movU || movD)
+			{
+				frameCounter += frameSpeed *clock.restart().asSeconds();
+
 			}
+			else
+			{
+				frameCounter = 0;
+			}
+
+			if (frameCounter >= switchFrame)
+			{
+				frameCounter = 0;
+				pSource.x++;
+				if (pSource.x * pHeight >= playerTexture.getSize().x)
+				{
+					pSource.x = 0;
+				}
+
+			}
+			
+			
 
 			//prep for refresh
 			playerSprite.setTextureRect(sf::IntRect(pSource.x * pHeight / 2, pSource.y * pHeight / 2, pHeight / 2, pHeight / 2));
