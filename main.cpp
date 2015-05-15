@@ -70,7 +70,6 @@ int main()
 					if (event.key.code == sf::Keyboard::Right)
 					{
 						rMove = true;
-						std::cout << "RIGHTPRESS!\n";
 					}
 					if (event.key.code == sf::Keyboard::Left)
 						lMove = true;
@@ -99,15 +98,21 @@ int main()
 
 				}
 
-				else
-					velocity.x = maxSpeedR;
+				/*else
+					velocity.x = maxSpeedR;*/				// Not needed
 			}
 			if (lMove)
 				if (velocity.x > maxSpeedL)
 					velocity.x -= acceleration;
-				else
-					velocity.x = maxSpeedL;
-
+				/*else
+					velocity.x = maxSpeedL;*/				// Not needed
+			if (!lMove && !rMove)
+			{
+				if (velocity.x > 0)
+					velocity.x -= acceleration;
+				if (velocity.x < 0)
+					velocity.x += acceleration;
+			}
 
 			//prep for refresh
 			playerSprite.setTextureRect(sf::IntRect(pSource.x * pHeight / 2, pSource.y * pHeight / 2, pHeight / 2, pHeight / 2));
