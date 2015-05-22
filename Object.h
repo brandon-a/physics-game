@@ -28,7 +28,18 @@ public:
 	virtual void unloadObj() {};
 	virtual void updateObj() {};
 	virtual void drawObj() {};
-
+	sf::Vector2f getPos() const { return pos; }
+	sf::Sprite getSprite() const { return sprite; }
+	sf::Texture getTexture() const { return texture; }
+	sf::Vector2f getScale() const { return scale; }
+	sf::Vector2f getSize() const { return size; }
+	sf::Vector2f getSource() const { return source; }
+	void setPos(sf::Vector2f pos)  { this->pos = pos; }
+	void setSprite(sf::Sprite sprite) { this->sprite = sprite; }
+	void setTextiure(sf::Texture texture) { this->pos = pos; }
+	void setScale(sf::Vector2f scale) { this->scale = scale; }
+	void setSize(sf::Vector2f size) { this->size = size; }
+	void setSource(sf::Vector2f source) { this->source = source; }
 
 
 };
