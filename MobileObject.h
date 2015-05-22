@@ -21,8 +21,8 @@ public:
 	void unloadObj() {};
 	void updateObj() {};
 	void drawObj() {};
-	sf::Vector2f const getVelC() {};
-	sf::Vector2f const getVelM() {};
+	sf::Vector2f const getVelC() { return velC; };
+	sf::Vector2f const getVelM() { return velM; };
 	void setVelC(sf::Vector2f) {};
 	void setVelM(sf::Vector2f) {};
 
