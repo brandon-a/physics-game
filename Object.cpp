@@ -10,5 +10,6 @@ Object::Object(std::string fileName, sf::Vector2f size, sf::Vector2f pos)
 	sprite.setTexture(texture);
 	sprite.setScale(2.0f, 2.0f);
 	source = { 0, 0 };
+	this->pos = pos;
 
 };

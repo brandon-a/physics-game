@@ -9,33 +9,14 @@
 int main()
 {
 	PlayerObject p1("resources/blueBoy.png", sf::Vector2f(64, 64), sf::Vector2f(100, 630));
-	//Variables
-	sf::Vector2i screenSize(1000, 800);
-	float pHeight = 64;		// chibi size y direction (height)			//********************************************** READY TO LEAVE
 
-	// to be moved to physics engine
-	sf::Vector2f velocity(0, 0);				//********************************************** READY TO LEAVE
-	float acceleration = 0.5;			
+
+	///////////////////////////TO BE REMOVED  ---   OBJECT OR DERIVED OBJECT CLASSES
+	float pHeight = 64;		// chibi size y direction (height)			//***PlayerObject Constructor
+	sf::Vector2f velocity(0, 0);									//***PlayerObject Constructor
 	float maxSpeedR = 10;		//********************************************** READY TO LEAVE
-	float maxSpeedL = -10;		//********************************************** READY TO LEAVE  (convert pos and neg)
-
-
-	float frameCounter = 0;
-	float switchFrame = 100;
-	float frameSpeed = 500;
-
-
-	enum direction {Down, Left, Right, Up};
-
-	bool movR = false;				// Game engine
-	bool movL = false;
-	bool movU = false;
-	bool movD = false;
-	// Game Setup
-	
-	
-
-	// Load playerSpriteData
+	float maxSpeedL = -10;		//********************************************** READY TO LEAVE  (convert pos and neg) ***************
+	enum direction { Down, Left, Right, Up };
 	sf::Texture playerTexture;	//********************************************** READY TO LEAVE
 	sf::Sprite playerSprite;		//********************************************** READY TO LEAVE
 	if (!playerTexture.loadFromFile("resources/blueBoy.png"))	//********************************************** READY TO LEAVE
@@ -45,6 +26,29 @@ int main()
 	sf::Vector2u pSource(0, 0);	//********************************************** READY TO LEAVE
 	playerSprite.setPosition(100, 630);	// set initial position		//********************************************** READY TO LEAVE
 
+
+	//Game Engine Class Variables
+	sf::Vector2i screenSize(1000, 800);
+	float frameCounter = 0;
+	float switchFrame = 100;
+	float frameSpeed = 500;
+	bool movR = false;				// Game engine
+	bool movL = false;
+	bool movU = false;
+	bool movD = false;	
+	sf::RenderWindow window(sf::VideoMode(screenSize.x, screenSize.y), "Physics Game"); // loads game window	
+	sf::Clock clock;
+	sf::Time timePerFrame = sf::seconds(1.0f / 60.0f);
+	sf::Clock deltaClock;
+	sf::Time timeSincelastUpdate = sf::Time::Zero;
+
+	// Physics Engine Class Variables
+
+
+	float acceleration = 0.5;			
+
+	// Game Setup
+	
 	// load background
 	sf::Texture backgroundTexture;
 	if (!backgroundTexture.loadFromFile("resources/marioBackground.jpg"))
@@ -52,12 +56,7 @@ int main()
 	sf::Sprite backgroundSprite(backgroundTexture);
 	backgroundSprite.setScale(1.0f, (float)screenSize.y / backgroundTexture.getSize().y);		// sets scale of background image in y direction to match the size of the window
 
-	sf::RenderWindow window(sf::VideoMode(screenSize.x, screenSize.y), "Physics Game"); // loads game window
-	
-	sf::Clock clock;
-	sf::Time timePerFrame = sf::seconds(1.0f / 60.0f);
-	sf::Clock deltaClock;
-	sf::Time timeSincelastUpdate = sf::Time::Zero;
+
 
 	while (window.isOpen())  // game loop, game is running!
 	{
@@ -183,6 +182,7 @@ int main()
 		window.clear();
 		window.draw(backgroundSprite);
 		window.draw(playerSprite);
+//		window.draw(p1.getSprite());
 		window.display();
 	}
 	return 0;
