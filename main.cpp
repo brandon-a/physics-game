@@ -110,21 +110,21 @@ int main()
 
 			if (movU && !movD)
 			{
-				pSource.y = Up;			// from object, setters and getters
+				p1.setSourcePos(sf::Vector2u(p1.getSourcePos().x, Up));		// from object, setters and getters
 				if (velocity.x > 0)		// getters and setters
 					velocity.x -= acceleration;
 			}
 
 			if (movD && !movU)
 			{
-				pSource.y = Down;
+				p1.setSourcePos(sf::Vector2u(p1.getSourcePos().x, Down));
 				if (velocity.x > 0)
 					velocity.x -= acceleration;
 			}
 
 			if (movR && !movL)
 			{
-				pSource.y = Right;		// changes the direction the sprite is facing
+				p1.setSourcePos(sf::Vector2u(p1.getSourcePos().x, Right));		// changes the direction the sprite is facing
 				if (velocity.x < maxSpeedR)
 				{
 					velocity.x += acceleration;
@@ -140,7 +140,7 @@ int main()
 
 			if (movL && !movR)
 			{
-				pSource.y = Left;
+				p1.setSourcePos(sf::Vector2u(p1.getSourcePos().x, Left));
 				if (velocity.x > maxSpeedL)
 					velocity.x -= acceleration;
 				else
@@ -160,20 +160,12 @@ int main()
 				frameCounter = 0;
 			}
 
-			if (frameCounter >= switchFrame)
-			{
-				frameCounter = 0;
-				pSource.x++;
-				if (pSource.x * pHeight >= playerTexture.getSize().x)
-				{
-					pSource.x = 0;
-				}
-
-			}
+			
 			
 			
 
 			//prep for refresh
+			p1.update(frameCounter, switchFrame);
 			playerSprite.setTextureRect(sf::IntRect(pSource.x * pHeight / 2, pSource.y * pHeight / 2, pHeight / 2, pHeight / 2));		// player object update function
 			playerSprite.move(velocity.x, velocity.y);			// player object update
 			//std::cout << velocity.x << std::endl;
@@ -182,7 +174,7 @@ int main()
 		window.clear();
 		window.draw(backgroundSprite);
 		window.draw(playerSprite);
-//		window.draw(p1.getSprite());
+		p1.draw(window);
 		window.display();
 	}
 	return 0;

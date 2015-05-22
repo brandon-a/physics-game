@@ -11,12 +11,11 @@
 class Object
 {
 protected:
-	sf::Vector2f pos;
 	sf::Sprite sprite;
 	sf::Texture texture;
 	sf::Vector2f scale;
 	sf::Vector2f size;
-	sf::Vector2f source; // locations for animations (at the moment) think of better name
+	sf::Vector2u sourcePos;
 	float mass;
 	enum direction { Down, Left, Right, Up };			// pull up to global?
 
@@ -24,22 +23,20 @@ public:
 	Object() {};
 	Object(std::string fileName, sf::Vector2f size, sf::Vector2f pos);
 	~Object() {};
-	virtual void loadObj() {};
-	virtual void unloadObj() {};
-	virtual void updateObj() {};
-	virtual void drawObj() {};
-	sf::Vector2f getPos() const { return pos; }
+	virtual void load() {};
+	virtual void unload() {};
+	virtual void update(float &frameCounter, float switchFrame) = 0;			// parameters will go away when we move the temporary code out
+	virtual void draw(sf::RenderWindow &window) { window.draw(sprite); }
 	sf::Sprite getSprite() const { return sprite; }
 	sf::Texture getTexture() const { return texture; }
 	sf::Vector2f getScale() const { return scale; }
 	sf::Vector2f getSize() const { return size; }
-	sf::Vector2f getSource() const { return source; }
-	void setPos(sf::Vector2f pos)  { this->pos = pos; }
+	sf::Vector2u getSourcePos() const { return sourcePos; }
 	void setSprite(sf::Sprite sprite) { this->sprite = sprite; }
-	void setTexture(sf::Texture texture) { this->pos = pos; }
+	void setTexture(sf::Texture texture) { this->texture = texture; }
 	void setScale(sf::Vector2f scale) { this->scale = scale; }
 	void setSize(sf::Vector2f size) { this->size = size; }
-	void setSource(sf::Vector2f source) { this->source = source; }
+	void setSourcePos(sf::Vector2u source) { this->sourcePos = source; }
 
 
 };
