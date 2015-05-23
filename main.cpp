@@ -10,7 +10,6 @@ int main()
 {
 	PlayerObject p1("resources/blueBoy.png", sf::Vector2f(64, 64), sf::Vector2f(100, 630));
 
-
 	///////////////////////////TO BE REMOVED  ---   OBJECT OR DERIVED OBJECT CLASSES
 	float pHeight = 64;		// chibi size y direction (height)			//***PlayerObject Constructor
 	sf::Vector2f velocity(0, 0);									//***PlayerObject Constructor
@@ -25,7 +24,6 @@ int main()
 	playerSprite.setScale(2.0f, 2.0f);	//********************************************** READY TO LEAVE
 	sf::Vector2u pSource(0, 0);	//********************************************** READY TO LEAVE
 	playerSprite.setPosition(100, 630);	// set initial position		//********************************************** READY TO LEAVE
-
 
 	//Game Engine Class Variables
 	sf::Vector2i screenSize(1000, 800);
@@ -44,7 +42,6 @@ int main()
 
 	// Physics Engine Class Variables
 
-
 	float acceleration = 0.5;			
 
 	// Game Setup
@@ -55,8 +52,6 @@ int main()
 		std::cout << "marioBackground.jpg failed to open!\n";
 	sf::Sprite backgroundSprite(backgroundTexture);
 	backgroundSprite.setScale(1.0f, (float)screenSize.y / backgroundTexture.getSize().y);		// sets scale of background image in y direction to match the size of the window
-
-
 
 	while (window.isOpen())  // game loop, game is running!
 	{
@@ -99,38 +94,31 @@ int main()
 						movU = false;
 					if (event.key.code == sf::Keyboard::Down)
 						movD = false;
-
-
-
-
 				}
-
 			}
-			//std::cout << playerSprite.getPosition().x << "," << playerSprite.getPosition().y << std::endl;    position to console
 
 			if (movU && !movD)
 			{
-				p1.setSourcePos(sf::Vector2u(p1.getSourcePos().x, Up));		// from object, setters and getters
-				if (velocity.x > 0)		// getters and setters
+				p1.setSourcePosY(Up);									// from object, setters and getters
+				if (velocity.x > 0)										// getters and setters
 					velocity.x -= acceleration;
 			}
 
 			if (movD && !movU)
 			{
-				p1.setSourcePos(sf::Vector2u(p1.getSourcePos().x, Down));
+				p1.setSourcePosY(Down);
 				if (velocity.x > 0)
 					velocity.x -= acceleration;
 			}
 
 			if (movR && !movL)
 			{
-				p1.setSourcePos(sf::Vector2u(p1.getSourcePos().x, Right));		// changes the direction the sprite is facing
+				p1.setSourcePosY(Right);		// changes the direction the sprite is facing
 				if (velocity.x < maxSpeedR)
 				{
 					velocity.x += acceleration;
 
 				}
-
 				else
 					velocity.x = maxSpeedR;		// get/set
 			}
@@ -140,7 +128,7 @@ int main()
 
 			if (movL && !movR)
 			{
-				p1.setSourcePos(sf::Vector2u(p1.getSourcePos().x, Left));
+				p1.setSourcePosY(Left);
 				if (velocity.x > maxSpeedL)
 					velocity.x -= acceleration;
 				else
@@ -160,15 +148,10 @@ int main()
 				frameCounter = 0;
 			}
 
-			
-			
-			
-
 			//prep for refresh
 			p1.update(frameCounter, switchFrame);
 			playerSprite.setTextureRect(sf::IntRect(pSource.x * pHeight / 2, pSource.y * pHeight / 2, pHeight / 2, pHeight / 2));		// player object update function
 			playerSprite.move(velocity.x, velocity.y);			// player object update
-			//std::cout << velocity.x << std::endl;
 		}
 		// frame refresh cycle
 		window.clear();
