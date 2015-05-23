@@ -1,5 +1,4 @@
-// StaticObject.h header file for non movable objects derived from the Object class
-
+//  StaticObject.h header file for non movable objects derived from the Object class
 
 #ifndef STATICOBJECT_H
 #define STATICOBJECT_H
@@ -10,17 +9,10 @@ class StaticObject : public Object
 {
 protected:
 
-
 public:
 	StaticObject(std::string fileName, sf::Vector2f size, sf::Vector2f pos) : Object(fileName, size, pos) {};
 	~StaticObject() {};
-	void update() {};
-
-
-
-
-
+	void update(float &frameCounter, float switchFrame);
 };
-
 
 #endif // STATICOBJECT_H

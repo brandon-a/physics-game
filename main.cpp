@@ -10,27 +10,27 @@ int main()
 {
 	PlayerObject p1("resources/blueBoy.png", sf::Vector2f(64, 64), sf::Vector2f(100, 630));
 
-	///////////////////////////TO BE REMOVED  ---   OBJECT OR DERIVED OBJECT CLASSES
-	float pHeight = 64;		// chibi size y direction (height)			//***PlayerObject Constructor
-	sf::Vector2f velocity(0, 0);									//***PlayerObject Constructor
-	float maxSpeedR = 10;		//********************************************** READY TO LEAVE
-	float maxSpeedL = -10;		//********************************************** READY TO LEAVE  (convert pos and neg) ***************
+	//************************************************TO BE REMOVED  ---   OBJECT OR DERIVED OBJECT CLASSES
+	float pHeight = 64;							// chibi size y direction (height)	
+	sf::Vector2f velocity(0, 0);								
+	float maxSpeedR = 10;		
+	float maxSpeedL = -10;						//******************* (convert pos and neg) ***************
 	enum direction { Down, Left, Right, Up };
-	sf::Texture playerTexture;	//********************************************** READY TO LEAVE
-	sf::Sprite playerSprite;		//********************************************** READY TO LEAVE
-	if (!playerTexture.loadFromFile("resources/blueBoy.png"))	//********************************************** READY TO LEAVE
-		std::cout << "blueBoy.png failed to open!\n";	//********************************************** READY TO LEAVE
-	playerSprite.setTexture(playerTexture);	//********************************************** READY TO LEAVE
-	playerSprite.setScale(2.0f, 2.0f);	//********************************************** READY TO LEAVE
-	sf::Vector2u pSource(0, 0);	//********************************************** READY TO LEAVE
-	playerSprite.setPosition(100, 630);	// set initial position		//********************************************** READY TO LEAVE
+	sf::Texture playerTexture;	
+	sf::Sprite playerSprite;		
+	if (!playerTexture.loadFromFile("resources/blueBoy.png"))
+		std::cout << "blueBoy.png failed to open!\n";	
+	playerSprite.setTexture(playerTexture);	
+	playerSprite.setScale(2.0f, 2.0f);	
+	sf::Vector2u pSource(0, 0);	
+	playerSprite.setPosition(100, 630);	
 
 	//Game Engine Class Variables
 	sf::Vector2i screenSize(1000, 800);
 	float frameCounter = 0;
 	float switchFrame = 100;
-	float frameSpeed = 500;
-	bool movR = false;				// Game engine
+	float frameSpeed = 400;
+	bool movR = false;				
 	bool movL = false;
 	bool movU = false;
 	bool movD = false;	
@@ -43,8 +43,6 @@ int main()
 	// Physics Engine Class Variables
 
 	float acceleration = 0.5;			
-
-	// Game Setup
 	
 	// load background
 	sf::Texture backgroundTexture;
@@ -70,7 +68,6 @@ int main()
 					window.close();
 					break;
 				case sf::Event::KeyPressed:
-
 					if (event.key.code == sf::Keyboard::Escape)
 						window.close();
 					if (event.key.code == sf::Keyboard::Right)
@@ -83,9 +80,7 @@ int main()
 						movD = true;
 					break;
 
-
 				case sf::Event::KeyReleased:
-
 					if (event.key.code == sf::Keyboard::Right)
 						movR = false;
 					if (event.key.code == sf::Keyboard::Left)
@@ -115,10 +110,7 @@ int main()
 			{
 				p1.setSourcePosY(Right);		// changes the direction the sprite is facing
 				if (velocity.x < maxSpeedR)
-				{
 					velocity.x += acceleration;
-
-				}
 				else
 					velocity.x = maxSpeedR;		// get/set
 			}
@@ -139,19 +131,14 @@ int main()
 					velocity.x += acceleration;
 
 			if (movL || movR || movU || movD)
-			{
 				frameCounter += frameSpeed *clock.restart().asSeconds();
-
-			}
 			else
-			{
 				frameCounter = 0;
-			}
 
 			//prep for refresh
 			p1.update(frameCounter, switchFrame);
-			playerSprite.setTextureRect(sf::IntRect(pSource.x * pHeight / 2, pSource.y * pHeight / 2, pHeight / 2, pHeight / 2));		// player object update function
-			playerSprite.move(velocity.x, velocity.y);			// player object update
+			playerSprite.setTextureRect(sf::IntRect(pSource.x * pHeight / 2, pSource.y * pHeight / 2, pHeight / 2, pHeight / 2));	// player object update function
+			playerSprite.move(velocity.x, velocity.y);																// player object update function
 		}
 		// frame refresh cycle
 		window.clear();
