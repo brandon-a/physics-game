@@ -23,7 +23,7 @@ int main()
 	playerSprite.setTexture(playerTexture);	
 	playerSprite.setScale(2.0f, 2.0f);	
 	sf::Vector2u pSource(0, 0);	
-	playerSprite.setPosition(100, 630);	
+	playerSprite.setPosition(200, 630);	
 
 	//Game Engine Class Variables
 	sf::Vector2i screenSize(1000, 800);
@@ -42,7 +42,8 @@ int main()
 
 	// Physics Engine Class Variables
 
-	float acceleration = 0.5;			
+	float acceleration = 0.5;	
+
 	
 	// load background
 	sf::Texture backgroundTexture;
@@ -95,15 +96,15 @@ int main()
 			if (movU && !movD)
 			{
 				p1.setSourcePosY(Up);									// from object, setters and getters
-				if (velocity.x > 0)										// getters and setters
-					velocity.x -= acceleration;
+				//if (velocity.x > 0)										// getters and setters
+				//	velocity.x -= acceleration;
 			}
 
 			if (movD && !movU)
 			{
 				p1.setSourcePosY(Down);
-				if (velocity.x > 0)
-					velocity.x -= acceleration;
+				/*if (velocity.x > 0)
+					velocity.x -= acceleration;*/
 			}
 
 			if (movR && !movL)
@@ -112,11 +113,25 @@ int main()
 				if (velocity.x < maxSpeedR)
 					velocity.x += acceleration;
 				else
-					velocity.x = maxSpeedR;		// get/set
+					velocity.x = maxSpeedR;		
+
+				//New one
+				if (p1.getVelC().x < p1.getVelM().x)
+					p1.setVelC(p1.getVelC() + p1.getForceN());
+				else
+					p1.setVelC(p1.getVelM());
+
 			}
 			else
+			{
 				if (velocity.x > 0)
 					velocity.x -= acceleration;
+				//new
+				if (p1.getVelC().x > 0)
+					p1.setVelC(p1.getVelC() - p1.getForceN());
+
+			}
+
 
 			if (movL && !movR)
 			{
@@ -125,10 +140,21 @@ int main()
 					velocity.x -= acceleration;
 				else
 					velocity.x = maxSpeedL;
+
+				//New one
+				if (p1.getVelC().x > 0 - p1.getVelM().x)
+					p1.setVelC(p1.getVelC() - p1.getForceN());
+				else
+					p1.setVelC(sf::Vector2f( 0 , 0 ) - p1.getVelM());
 			}
 			else
+			{
 				if (velocity.x < 0)
 					velocity.x += acceleration;
+				//new
+				if (p1.getVelC().x < 0)
+					p1.setVelC(p1.getVelC() + p1.getForceN());
+			}
 
 			if (movL || movR || movU || movD)
 				frameCounter += frameSpeed *clock.restart().asSeconds();
