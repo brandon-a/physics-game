@@ -9,22 +9,7 @@
 int main()
 {
 	PlayerObject p1("resources/blueBoy.png", sf::Vector2f(64, 64), sf::Vector2f(100, 630));
-
-	//************************************************TO BE REMOVED  ---   OBJECT OR DERIVED OBJECT CLASSES
-	float pHeight = 64;							// chibi size y direction (height)	
-	sf::Vector2f velocity(0, 0);								
-	float maxSpeedR = 10;		
-	float maxSpeedL = -10;						//******************* (convert pos and neg) ***************
 	enum direction { Down, Left, Right, Up };
-	sf::Texture playerTexture;	
-	sf::Sprite playerSprite;		
-	if (!playerTexture.loadFromFile("resources/blueBoy.png"))
-		std::cout << "blueBoy.png failed to open!\n";	
-	playerSprite.setTexture(playerTexture);	
-	playerSprite.setScale(2.0f, 2.0f);	
-	sf::Vector2u pSource(0, 0);	
-	playerSprite.setPosition(200, 630);	
-
 	//Game Engine Class Variables
 	sf::Vector2i screenSize(1000, 800);
 	float frameCounter = 0;
@@ -42,7 +27,7 @@ int main()
 
 	// Physics Engine Class Variables
 
-	float acceleration = 0.5;	
+	//float acceleration = 0.5;	    removeable?
 
 	
 	// load background
@@ -110,12 +95,6 @@ int main()
 			if (movR && !movL)
 			{
 				p1.setSourcePosY(Right);		// changes the direction the sprite is facing
-				if (velocity.x < maxSpeedR)
-					velocity.x += acceleration;
-				else
-					velocity.x = maxSpeedR;		
-
-				//New one
 				if (p1.getVelC().x < p1.getVelM().x)
 					p1.setVelC(p1.getVelC() + p1.getForceN());
 				else
@@ -124,9 +103,6 @@ int main()
 			}
 			else
 			{
-				if (velocity.x > 0)
-					velocity.x -= acceleration;
-				//new
 				if (p1.getVelC().x > 0)
 					p1.setVelC(p1.getVelC() - p1.getForceN());
 
@@ -136,12 +112,6 @@ int main()
 			if (movL && !movR)
 			{
 				p1.setSourcePosY(Left);
-				if (velocity.x > maxSpeedL)
-					velocity.x -= acceleration;
-				else
-					velocity.x = maxSpeedL;
-
-				//New one
 				if (p1.getVelC().x > 0 - p1.getVelM().x)
 					p1.setVelC(p1.getVelC() - p1.getForceN());
 				else
@@ -149,9 +119,6 @@ int main()
 			}
 			else
 			{
-				if (velocity.x < 0)
-					velocity.x += acceleration;
-				//new
 				if (p1.getVelC().x < 0)
 					p1.setVelC(p1.getVelC() + p1.getForceN());
 			}
@@ -163,13 +130,10 @@ int main()
 
 			//prep for refresh
 			p1.update(frameCounter, switchFrame);
-			playerSprite.setTextureRect(sf::IntRect(pSource.x * pHeight / 2, pSource.y * pHeight / 2, pHeight / 2, pHeight / 2));	// player object update function
-			playerSprite.move(velocity.x, velocity.y);																// player object update function
 		}
 		// frame refresh cycle
 		window.clear();
 		window.draw(backgroundSprite);
-		window.draw(playerSprite);
 		p1.draw(window);
 		window.display();
 	}
