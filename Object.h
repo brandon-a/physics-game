@@ -12,7 +12,6 @@ class Object
 protected:
 	sf::Sprite sprite;
 	sf::Texture texture;
-	sf::Vector2f scale;
 	sf::Vector2f size;
 	sf::Vector2u sourcePos;
 	float mass;
@@ -28,14 +27,14 @@ public:
 	virtual void draw(sf::RenderWindow &window) { window.draw(sprite); }
 	sf::Sprite getSprite() const { return sprite; }
 	sf::Texture getTexture() const { return texture; }
-	sf::Vector2f getScale() const { return scale; }
+	sf::Vector2f getScale() const { return sprite.getScale(); }
 	sf::Vector2f getSize() const { return size; }
 	sf::Vector2u getSourcePos() const { return sourcePos; }
 	unsigned int getSourcePosX() const { return sourcePos.x; }
 	unsigned int getSourcePosY() const { return sourcePos.y; }
 	void setSprite(sf::Sprite sprite) { this->sprite = sprite; }
 	void setTexture(sf::Texture texture) { this->texture = texture; }
-	void setScale(sf::Vector2f scale) { this->scale = scale; }
+	void setScale(float x, float y) { sprite.setScale( x , y ); }
 	void setSize(sf::Vector2f size) { this->size = size; }
 	void setSourcePos(sf::Vector2u source) { this->sourcePos = source; }
 	void setSourcePosX(unsigned int source) { this->sourcePos.x = source; }
