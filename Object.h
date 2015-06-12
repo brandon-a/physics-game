@@ -7,6 +7,8 @@
 #include <string>
 #include <iostream>
 
+//enum direction { Down, Left, Right, Up };			
+
 class Object
 {
 protected:
@@ -15,11 +17,13 @@ protected:
 	sf::Vector2f size;
 	sf::Vector2u sourcePos;
 	float mass;
-	enum direction { Down, Left, Right, Up };			// pull up to global?
+	float mu;
+	sf::Vector2f forceA;
+
 
 public:
 	Object() {};
-	Object(std::string fileName, sf::Vector2f size, sf::Vector2f pos);
+	Object(std::string fileName, sf::Vector2f size, sf::Vector2f pos, float mu = 1, sf::Vector2f forceA = { 0, 0 });
 	~Object() {};
 	virtual void load() {};
 	virtual void unload() {};
@@ -32,6 +36,8 @@ public:
 	sf::Vector2u getSourcePos() const { return sourcePos; }
 	unsigned int getSourcePosX() const { return sourcePos.x; }
 	unsigned int getSourcePosY() const { return sourcePos.y; }
+	sf::Vector2f getForceA() const { return forceA; }
+	float getMass() const { return mass; }
 	void setSprite(sf::Sprite sprite) { this->sprite = sprite; }
 	void setTexture(sf::Texture texture) { this->texture = texture; }
 	void setScale(float x, float y) { sprite.setScale( x , y ); }
@@ -39,6 +45,8 @@ public:
 	void setSourcePos(sf::Vector2u source) { this->sourcePos = source; }
 	void setSourcePosX(unsigned int source) { this->sourcePos.x = source; }
 	void setSourcePosY(unsigned int source) { this->sourcePos.y = source; }
+	void setForceA(sf::Vector2f acc) { this->forceA = acc; }
+	void setMass(float mass) { this->mass = mass; }
 };
 
 #endif  // OBJECT_H

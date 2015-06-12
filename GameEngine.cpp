@@ -21,19 +21,28 @@ GameEngine::GameEngine()
 
 	window = new sf::RenderWindow(sf::VideoMode(screenSize.x, screenSize.y), "Physics Game"); // loads game window	
 	timeSincelastUpdate = sf::Time::Zero;
+
+	physEng.setGravity({ 0.0f, -9.8f });
+
 }
 
 GameEngine::~GameEngine()
 {
 }
 
+//
+System GameEngine::createSystem(Object *o1)
+{
+	System temp;
+	temp.force = o1->getForceA();
+	temp.mass = o1->getMass();
+	temp.theta = o1->getSprite().getRotation();
+	return temp;
+}
+
 void GameEngine::gameLoop(){
 
-	// Physics Engine Class Variables
-
-	// float acceleration = 0.5;	    removeable?
-
-	while (window->isOpen())  // game loop, game is running!
+	while (window->isOpen()) 
 	{
 		sf::Time deltaTime = deltaClock.restart();
 		timeSincelastUpdate += deltaTime;
@@ -92,7 +101,7 @@ void GameEngine::gameLoop(){
 			{
 				p1->setSourcePosY(Right);		// changes the direction the sprite is facing
 				if (p1->getVelC().x < p1->getVelM().x)
-					p1->setVelC(p1->getVelC() + p1->getForceN());
+					p1->setVelC(p1->getVelC() + p1->getForceA());
 				else
 					p1->setVelC(p1->getVelM());
 
@@ -100,7 +109,7 @@ void GameEngine::gameLoop(){
 			else
 			{
 				if (p1->getVelC().x > 0)
-					p1->setVelC(p1->getVelC() - p1->getForceN());
+					p1->setVelC(p1->getVelC() - p1->getForceA());
 
 			}
 
@@ -109,14 +118,14 @@ void GameEngine::gameLoop(){
 			{
 				p1->setSourcePosY(Left);
 				if (p1->getVelC().x > 0 - p1->getVelM().x)
-					p1->setVelC(p1->getVelC() - p1->getForceN());
+					p1->setVelC(p1->getVelC() - p1->getForceA());
 				else
 					p1->setVelC(sf::Vector2f(0, 0) - p1->getVelM());
 			}
 			else
 			{
 				if (p1->getVelC().x < 0)
-					p1->setVelC(p1->getVelC() + p1->getForceN());
+					p1->setVelC(p1->getVelC() + p1->getForceA());
 			}
 
 			if (movL || movR || movU || movD)

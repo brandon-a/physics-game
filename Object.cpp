@@ -5,7 +5,7 @@
 // Constructor -
 // Creates the texture and sprite for the object.  
 // Sets the inital scale, source position, and screen position.
-Object::Object(std::string fileName, sf::Vector2f size, sf::Vector2f pos)
+Object::Object(std::string fileName, sf::Vector2f size, sf::Vector2f pos, float mu, sf::Vector2f forceA)
 {
 	this->size = size;
 	if (!texture.loadFromFile(fileName))
@@ -14,4 +14,7 @@ Object::Object(std::string fileName, sf::Vector2f size, sf::Vector2f pos)
 	sprite.setScale(2.0f, 2.0f);
 	sourcePos = { 0, 0 };
 	sprite.setPosition(pos);
+	this->mu = mu;
+	this->forceA = forceA;
+
 };

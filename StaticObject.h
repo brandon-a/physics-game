@@ -10,7 +10,7 @@ class StaticObject : public Object
 protected:
 
 public:
-	StaticObject(std::string fileName, sf::Vector2f size, sf::Vector2f pos) : Object(fileName, size, pos) {};
+	StaticObject(std::string fileName, sf::Vector2f size, sf::Vector2f pos, float mu = 1, sf::Vector2f forceA = { 0, 0 }) : Object(fileName, size, pos, mu) {};
 	~StaticObject() {};
 	void update(float &frameCounter, float switchFrame);
 };
