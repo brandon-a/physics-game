@@ -7,7 +7,6 @@
 #include <iostream>
 #include "PlayerObject.h"
 #include "StaticObject.h"
-#include "PhysicsEngine.h"
 
 enum direction { Down, Left, Right, Up };
 

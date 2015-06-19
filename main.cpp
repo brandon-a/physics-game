@@ -35,7 +35,7 @@ int main()
 	//if (!backgroundTexture.loadFromFile("resources/marioBackground.jpg"))
 	//	std::cout << "marioBackground.jpg failed to open!\n";
 	//sf::Sprite backgroundSprite(backgroundTexture);
-	//backgroundSprite.setScale(1.0f, (float)screenSize.y / backgroundTexture.getSize().y);		// sets scale of background image in y direction to match the size of the window
+	//backgroundsprite->setScale(1.0f, (float)screenSize.y / backgroundTexture.getSize().y);		// sets scale of background image in y direction to match the size of the window
 
 	//while (window.isOpen())  // game loop, game is running!
 	//{

@@ -11,6 +11,9 @@ struct System
 	float mass;
 	sf::Vector2f force;
 	float theta;
+	float mu;
+	sf::Vector2f vel;
+	sf::Vector2f acc;
 };
 
 class PhysicsEngine

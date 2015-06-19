@@ -7,8 +7,8 @@
 // Will update the object's screen position
 void MobileObject::update(float &frameCounter, float switchFrame)
 {
-	sprite.setTextureRect(sf::IntRect(sourcePos.x * size.y / 2, sourcePos.y * size.y / 2, size.y / 2, size.y / 2));
-	sprite.move(velC);
+	sprite->setTextureRect(sf::IntRect(sourcePos.x * size.y / 2, sourcePos.y * size.y / 2, size.y / 2, size.y / 2));
+	sprite->move(velC);
 	if (frameCounter >= switchFrame)							///// FIX ME TEMPORARY !!!!! ************
 	{
 		frameCounter = 0;
