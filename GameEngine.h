@@ -20,7 +20,7 @@ private:
 	sf::Clock clock;
 	sf::Time timePerFrame;
 	PlayerObject *p1;
-	Object *allobjects;		// this pointer will point to an array of all the objects in the game
+	Object *allObjects;		// this pointer will point to an array of all the objects in the game
 	PhysicsEngine physEng;
 
 	sf::Vector2f screenSize;		// keep elsewhere do not delete
