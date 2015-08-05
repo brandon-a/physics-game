@@ -13,11 +13,12 @@ GameEngine::GameEngine()
 
 	screenSize = sf::Vector2f(1000, 800);		// keep elsewhere do not delete
 	background = new StaticObject("resources/marioBackground.jpg", screenSize, sf::Vector2f(0, 0));
+	//  this line is going to be changed with views.
 	background->setScale(1.0f, (float)screenSize.y / background->getTexture().getSize().y);		// sets scale of background image in y direction to match the size of the window
 
-	frameCounter = 0;				// for animations isanimatable
+	frameCounter = 0;				// for animations isanimatable     -  perhaps static
 	switchFrame = 100;			// for animations isanimatable
-	frameSpeed = 400;				// for animations isanimatable
+	frameSpeed = 400;				// for animations isanimatable	- perhaps static
 
 	window = new sf::RenderWindow(sf::VideoMode(screenSize.x, screenSize.y), "Physics Game"); // loads game window	
 	timeSincelastUpdate = sf::Time::Zero;
