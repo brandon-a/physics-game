@@ -7,6 +7,7 @@
 #include <iostream>
 #include "PlayerObject.h"
 #include "StaticObject.h"
+#include "TextureManager.h"
 
 enum direction { Down, Left, Right, Up };
 
@@ -22,7 +23,7 @@ private:
 	PlayerObject *p1;
 	Object *allObjects;		// this pointer will point to an array of all the objects in the game
 	PhysicsEngine physEng;
-
+	TextureManager txtrMng;
 	sf::Vector2f screenSize;		// keep elsewhere do not delete
 	StaticObject *background;
 	float frameCounter;				// for animations isanimatable

@@ -9,15 +9,17 @@ GameEngine::GameEngine()
 	movU = false;
 	movD = false;
 	timePerFrame = sf::seconds(1.0f / 60.0f);
-	p1 = new PlayerObject("resources/blueBoy.png", sf::Vector2f(64, 64), sf::Vector2f(100, 630));
+	txtrMng.addDirectory("resources/");
+
+	p1 = new PlayerObject(txtrMng.getTexture("blueBoy.png"), sf::Vector2f(64, 64), sf::Vector2f(100, 630));
 
 	screenSize = sf::Vector2f(1000, 800);		// keep elsewhere do not delete
-	background = new StaticObject("resources/marioBackground.jpg", screenSize, sf::Vector2f(0, 0));
+	background = new StaticObject(txtrMng.getTexture("marioBackground.jpg"), screenSize, sf::Vector2f(0, 0));
 	//  this line is going to be changed with views.
-	background->setScale(1.0f, (float)screenSize.y / background->getTexture().getSize().y);		// sets scale of background image in y direction to match the size of the window
+	background->setScale(1.0f, (float)screenSize.y / background->getTexture()->getSize().y);		// sets scale of background image in y direction to match the size of the window
 
 	frameCounter = 0;				// for animations isanimatable     -  perhaps static
-	switchFrame = 100;			// for animations isanimatable
+	switchFrame = 100;				// for animations isanimatable
 	frameSpeed = 400;				// for animations isanimatable	- perhaps static
 
 	window = new sf::RenderWindow(sf::VideoMode(screenSize.x, screenSize.y), "Physics Game"); // loads game window	
@@ -133,5 +135,7 @@ void GameEngine::gameLoop(){
 		background->draw(*window);
 		p1->draw(*window);
 		window->display();
+
+
 	}
 }

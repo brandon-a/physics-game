@@ -11,7 +11,7 @@ void StaticObject::update(float &frameCounter, float switchFrame)
 	{
 		frameCounter = 0;
 		sourcePos.x++;
-		if (sourcePos.x * size.y >= texture.getSize().x)
+		if (sourcePos.x * size.y >= sprite->getTexture()->getSize().x)
 		{
 			sourcePos.x = 0;
 		}
