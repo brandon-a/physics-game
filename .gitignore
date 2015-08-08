@@ -16,3 +16,7 @@ x64/Debug/Physics Game.pdb
 Debug/vc120.pdb
 *.sln
 x64/Debug/vc120.pdb
+*.pdb
+*.user
+resources/Thumbs.db
+*.opensdf
