@@ -10,8 +10,9 @@ class PlayerObject : public MobileObject
 protected:
 	
 public:
-	PlayerObject(const sf::Texture &texture, sf::Vector2f size, sf::Vector2f pos, float mass = 30, float mu = 1, sf::Vector2f forceA = { 0.5, 0 }, float theta = 0, sf::Vector2f velC = { 0, 0 }, float maxAForce = 5)
-		: MobileObject(texture, size, pos, mass, mu, forceA, theta, velC, maxAForce){};
+	PlayerObject() {};
+	PlayerObject(const sf::Texture &texture, sf::Vector2f size, sf::Vector2f pos) : MobileObject(texture, size, pos){};
+	
 	~PlayerObject() {};
 
 };

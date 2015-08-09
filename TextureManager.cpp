@@ -16,32 +16,34 @@ const sf::Texture& TextureManager::getTexture(const std::string &filename)
 	for (std::map<std::string, sf::Texture>::const_iterator it = textures.begin(); it != textures.end(); it++)
 	{
 		if (filename == it->first)
-		{
-			//std::cout << "using existing texture.\n";		// FOR DEBUGGING
 			return it->second;
-		}
-	}
-	// Else.. Create and save it.
-	sf::Texture texture;
-	if (texture.loadFromFile(filename))
-	{
-		textures[filename] = texture;
-		//std::cout << "loading  " << filename << std::endl;			// FOR DEBUGGING
-		return textures[filename];
 	}
 
-	// If still not found, search directories
-	for (std::vector< std::string >::iterator it = directories.begin(); it != directories.end(); it++)
+	sf::Texture texture;
+	// Else.. Create and save it.
+
+	// if no sub directories are indicated... 
+	if (directories.empty())			
 	{
-		if (texture.loadFromFile((*it) + filename))
+		if (texture.loadFromFile(filename))
 		{
 			textures[filename] = texture;
-			//std::cout << "loading  " << filename << std::endl;			// FOR DEBUGGING
 			return textures[filename];
 		}
-
 	}
-	// If still not found, fill texture map with empty image
+	// if sub directory(s) is indicated... 						
+	else							
+	{
+		for (std::vector< std::string >::iterator it = directories.begin(); it != directories.end(); it++)
+		{
+			if (texture.loadFromFile((*it) + filename))
+			{
+				textures[filename] = texture;
+				return textures[filename];
+			}
+		}
+	}
+	// If not found, fill texture map with empty image
 	std::cout << "ERROR: " << filename << " was not found.It will be filled with an empty texture.\n";
 	textures[filename] = texture;
 	return textures[filename];
@@ -53,8 +55,7 @@ void TextureManager::unloadTexture(const sf::Texture &texture)
 	{
 		if (&texture == &it->second)
 		{
-			textures.erase(it);
-			std::cout << "Deleted.\n";			
+			textures.erase(it);		
 			return;
 		}
 	}
@@ -64,11 +65,7 @@ void TextureManager::unloadTexture(const std::string &filename)
 {
 	std::map<std::string, sf::Texture>::const_iterator it = textures.find(filename);
 	if (it != textures.end())
-	{
-		textures.erase(it);
-		std::cout << "Deleted  " << filename << std::endl;	
-	}
-		
+		textures.erase(it);			
 }
 
 void TextureManager::addDirectory(const std::string &directory)
